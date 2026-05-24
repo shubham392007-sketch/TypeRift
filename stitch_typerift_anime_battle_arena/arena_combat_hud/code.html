@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TypeRift Battle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Anybody:wght@700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "primary": "#d0bcff",
+                        "tertiary-fixed": "#acedff",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-bright": "#393939",
+                        "on-primary": "#3c0091",
+                        "secondary-container": "#a40217",
+                        "surface-container": "#1f1f1f",
+                        "on-surface": "#e2e2e2",
+                        "on-secondary-fixed": "#410004",
+                        "on-background": "#e2e2e2",
+                        "on-tertiary-container": "#002f38",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#131313",
+                        "secondary": "#ffb3ad",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-highest": "#353535",
+                        "outline": "#958ea0",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "on-surface-variant": "#cbc3d7",
+                        "inverse-primary": "#6d3bd7",
+                        "outline-variant": "#494454",
+                        "primary-fixed-dim": "#d0bcff",
+                        "tertiary": "#4cd7f6",
+                        "on-error": "#690005",
+                        "surface-variant": "#353535",
+                        "on-secondary-container": "#ffaea8",
+                        "on-secondary": "#68000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#003640",
+                        "on-secondary-fixed-variant": "#930013",
+                        "surface": "#131313",
+                        "primary-container": "#a078ff",
+                        "tertiary-container": "#009eb9",
+                        "secondary-fixed": "#ffdad7",
+                        "inverse-on-surface": "#303030",
+                        "surface-container-high": "#2a2a2a",
+                        "error-container": "#93000a",
+                        "surface-tint": "#d0bcff",
+                        "on-tertiary-fixed": "#001f26",
+                        "background": "#131313",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-primary-container": "#340080",
+                        "on-primary-fixed": "#23005c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "panel-gap": "24px",
+                        "gutter": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Space Grotesk"],
+                        "headline-md": ["Anybody"],
+                        "typing-area": ["JetBrains Mono"],
+                        "headline-lg": ["Anybody"],
+                        "headline-xl": ["Anybody"],
+                        "hud-stat": ["JetBrains Mono"],
+                        "body-sm": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "typing-area": ["40px", { "lineHeight": "1.5", "letterSpacing": "0.2em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "hud-stat": ["18px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glitch-effect { position: relative; }
+        .glitch-effect::before, .glitch-effect::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: inherit; opacity: 0.8; mix-blend-mode: hard-light; pointer-events: none;
+        }
+        .glitch-effect::before { left: 2px; text-shadow: -1px 0 red; animation: glitch-anim-1 2s infinite linear alternate-reverse; }
+        .glitch-effect::after { left: -2px; text-shadow: -1px 0 blue; animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+        @keyframes glitch-anim-1 { 0% { clip-path: inset(20% 0 80% 0); } 20% { clip-path: inset(60% 0 10% 0); } 40% { clip-path: inset(40% 0 50% 0); } 60% { clip-path: inset(80% 0 5% 0); } 80% { clip-path: inset(10% 0 70% 0); } 100% { clip-path: inset(30% 0 20% 0); } }
+        @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 60% 0); } 20% { clip-path: inset(80% 0 5% 0); } 40% { clip-path: inset(30% 0 20% 0); } 60% { clip-path: inset(70% 0 15% 0); } 80% { clip-path: inset(40% 0 50% 0); } 100% { clip-path: inset(5% 0 80% 0); } }
+        .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); background-size: 100% 4px; pointer-events: none; }
+        .glass-panel { background: rgba(19, 19, 19, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(208, 188, 255, 0.2); }
+        .neon-glow { box-shadow: 0 0 15px rgba(208, 188, 255, 0.5), inset 0 0 10px rgba(208, 188, 255, 0.3); }
+        .typing-cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .hp-bar-fill { transition: width 0.3s ease-out; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-sm overflow-hidden relative">
+<!-- Background Canvas -->
+<div class="absolute inset-0 z-0">
+<img alt="Battle Background" class="w-full h-full object-cover opacity-60" data-alt="A highly detailed, cinematic anime-style battle scene background. Dark cyberpunk city ruins at night, illuminated by harsh purple and neon red lighting. Glowing embers and particle effects float in the air. The atmosphere is tense, chaotic, and energetic, designed for a fast-paced battle arena interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzOGuiQMDmpuOzCH9zYJi9Zwcvy8osw5y46zWU89DoOYyE00g1casNpwfNNBBxK7YzDSSh9jaizdujHyN8Rr7YE2ZMpLhfCWg3a-LGcKg0Hrzq0eaF14eGTOJ27qgjTbb5DzV9Z3NS5JtJXgYer6dyXXHRBjr4_6tr1z3TGhbtUhjT9GhB6_biXNai8jODHaEFyL1gx5bKLGEFuPnwrTmF9Qss5D98V2hd9tQjiD00I6wusg13PZWAJ7jx17mcvHIGnPpjGuq91yY1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50"></div>
+<div class="absolute inset-0 scanlines opacity-50 z-10"></div>
+</div>
+<!-- Navigation Shell (TopAppBar - Desktop) -->
+<nav class="hidden md:flex justify-between items-center w-full px-margin-desktop h-16 max-w-none bg-surface-dim/80 dark:bg-surface-dim/80 border-b border-outline-variant/30 backdrop-blur-md shadow-[0_0_20px_rgba(208,188,255,0.1)] absolute top-0 z-50">
+<div class="flex items-center gap-2 text-primary dark:text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swords</span>
+<span class="text-headline-md font-headline-md font-black tracking-tighter">TYPERIFT</span>
+</div>
+<div class="flex gap-4">
+<button class="text-on-surface-variant font-label-caps hover:bg-primary-container/20 hover:text-primary transition-all duration-300 p-2 rounded">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant font-label-caps hover:bg-primary-container/20 hover:text-primary transition-all duration-300 p-2 rounded">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="text-on-surface-variant font-label-caps hover:bg-primary-container/20 hover:text-primary transition-all duration-300 p-2 rounded">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</nav>
+<!-- Main Battle Arena -->
+<main class="flex-grow flex flex-col justify-between pt-20 md:pt-24 pb-24 px-4 md:px-margin-desktop relative z-20">
+<!-- Top HUD (HP & Timer) -->
+<div class="flex justify-between items-start w-full gap-4 md:gap-8 relative z-30">
+<!-- Player Status -->
+<div class="flex-1 max-w-md glass-panel p-2 rounded-lg relative overflow-hidden">
+<div class="flex items-center gap-3 mb-2">
+<img alt="Shadow Assassin" class="w-12 h-12 rounded border border-primary/50" data-alt="Avatar portrait of a dark anime swordsman 'Shadow Assassin'. Gritty, intense expression, purple glowing eyes, dark spiky hair. Cyberpunk fantasy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRaJpVqWwb4FEhoEMA7jnUucr61KGjSrEyOP5e1j_NeMmoKtliZcbeyAz_33eT8Z9gH6DWLQki0eUPrW8koez_7a9GNxY8ZEiZY8OL_0r835iJj84Dm2sdzpaWLqICGMSEnqcecnNsqeICVUwO1KgtsLvMpCHeWbkCbcEZy_b0GGae-bS_bGJtx48ccB0tUirx0TfrepCclePRmCgz80ykjMO6sTBqwWoYOdFmo631t896U8mFzEKrJ90AimhG93_sY8UeI3I9ZCZz"/>
+<div>
+<div class="font-label-caps text-primary tracking-widest text-sm">SHADOW ASSASSIN</div>
+<div class="font-hud-stat text-on-surface text-xs mt-1">8,450 / 10,000</div>
+</div>
+</div>
+<!-- HP Bar -->
+<div class="h-4 bg-surface-container-high rounded overflow-hidden border border-outline-variant/30">
+<div class="h-full bg-primary hp-bar-fill w-[84.5%] neon-glow"></div>
+</div>
+<!-- Energy Segments -->
+<div class="flex gap-1 mt-1 px-1 h-1.5 opacity-70">
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-surface-variant"></div>
+<div class="flex-1 bg-surface-variant"></div>
+</div>
+</div>
+<!-- VS / Timer Center -->
+<div class="flex flex-col items-center justify-start pt-2 px-4">
+<div class="font-label-caps text-outline text-xs mb-1">TIME</div>
+<div class="font-headline-lg text-inverse-surface tracking-wider leading-none glitch-effect" data-text="01:24">01:24</div>
+<div class="mt-4 font-headline-md text-error italic opacity-80 rotate-[-10deg]">VS</div>
+</div>
+<!-- Enemy Status -->
+<div class="flex-1 max-w-md glass-panel p-2 rounded-lg relative overflow-hidden flex flex-col items-end text-right">
+<div class="flex items-center gap-3 mb-2 flex-row-reverse">
+<img alt="Rival Specter" class="w-12 h-12 rounded border border-error/50" data-alt="Avatar portrait of a fiery anime rival character 'Rival Specter'. Aggressive smirk, red glowing eyes, white hair. Cyberpunk villain aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgVkWEe2PniY9D1LlqR07KEugmfwbD9ZzUXHBZ1UPiQxoMyzW64hA_fDiHuCa5Wd-ksncyecX6Z-28w2qiaPGmyPERq_7Rj6GTGFT-ys4hV8MWXxBdr6lIQNl5nW5SfRBwp6IWg_a7JVBEUETQLe1wAvKHVM58Fz0Lk0uBxZpcdHPuN6rZAGbdMcIAVAqa4O-wQZ7CvYL4dWlgtSB6XrcZ8h4csKrK4-46Eg43djTE0pIHVYCxAr2Y8lfamyUe2XEER3CWo31TnGGy"/>
+<div>
+<div class="font-label-caps text-error tracking-widest text-sm">RIVAL SPECTER</div>
+<div class="font-hud-stat text-on-surface text-xs mt-1">8,290 / 10,000</div>
+</div>
+</div>
+<!-- HP Bar -->
+<div class="h-4 w-full bg-surface-container-high rounded overflow-hidden border border-outline-variant/30 flex justify-end">
+<div class="h-full bg-error hp-bar-fill w-[82.9%] shadow-[0_0_15px_rgba(255,180,171,0.5)]"></div>
+</div>
+<!-- Energy Segments -->
+<div class="flex gap-1 mt-1 px-1 h-1.5 w-full opacity-70 flex-row-reverse">
+<div class="flex-1 bg-secondary"></div>
+<div class="flex-1 bg-secondary"></div>
+<div class="flex-1 bg-surface-variant"></div>
+<div class="flex-1 bg-surface-variant"></div>
+<div class="flex-1 bg-surface-variant"></div>
+</div>
+</div>
+</div>
+<!-- Center Combat Area (Visual Placeholder) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<!-- Simulated Action Elements -->
+<div class="w-1/2 h-64 bg-gradient-to-r from-primary/10 to-transparent absolute left-0 blur-xl"></div>
+<div class="w-1/2 h-64 bg-gradient-to-l from-error/10 to-transparent absolute right-0 blur-xl"></div>
+</div>
+<!-- Combo & Stats Overlay (Side) -->
+<div class="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-6 items-end z-30">
+<div class="glass-panel p-4 rounded-xl border-r-2 border-r-tertiary text-right min-w-[120px]">
+<div class="font-label-caps text-outline text-xs">WPM</div>
+<div class="font-hud-stat text-3xl text-tertiary-fixed">124</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border-r-2 border-r-primary text-right min-w-[120px]">
+<div class="font-label-caps text-outline text-xs">ACCURACY</div>
+<div class="font-hud-stat text-3xl text-primary-fixed">96%</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border-r-4 border-r-secondary text-right min-w-[120px] bg-secondary-container/20">
+<div class="font-label-caps text-secondary text-xs animate-pulse">COMBO</div>
+<div class="font-headline-lg text-secondary text-4xl scale-110 origin-right">x2.8</div>
+</div>
+</div>
+<!-- Bottom Typing Zone -->
+<div class="w-full max-w-4xl mx-auto relative z-40 mt-auto">
+<!-- Helper Text -->
+<div class="text-center mb-2 font-label-caps text-primary text-xs tracking-widest uppercase">
+<span class="inline-block bg-primary/20 px-4 py-1 rounded-full border border-primary/30">Next Word</span>
+</div>
+<!-- Input Panel -->
+<div class="glass-panel rounded-2xl p-6 md:p-8 neon-glow relative overflow-hidden border-2 border-primary/50">
+<!-- Inner Glitch Accent -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<div class="flex justify-center items-center h-20 text-center relative z-10">
+<span class="font-typing-area text-typing-area text-inverse-surface tracking-[0.3em]">
+<span class="text-tertiary opacity-80">PHAN</span><span class="text-primary-fixed-dim">TOM STRIKE</span><span class="typing-cursor inline-block w-4 h-10 bg-primary align-middle ml-2"></span>
+</span>
+</div>
+<!-- Micro Progress Bar under text -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-surface-variant">
+<div class="h-full bg-tertiary w-[30%]"></div>
+</div>
+</div>
+<!-- Action Buttons (Arcade Style) -->
+<div class="flex justify-between mt-4 px-4">
+<button class="glass-panel p-3 rounded flex flex-col items-center justify-center gap-1 hover:bg-tertiary/20 hover:border-tertiary transition-colors border-l-4 border-l-tertiary">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+<span class="font-label-caps text-xs text-on-surface-variant">BOOST</span>
+</button>
+<button class="glass-panel p-3 rounded flex flex-col items-center justify-center gap-1 hover:bg-error/20 hover:border-error transition-colors border-r-4 border-r-error">
+<span class="material-symbols-outlined text-error">explosion</span>
+<span class="font-label-caps text-xs text-on-surface-variant">ULTIMATE</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Navigation Shell (BottomNavBar - Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe md:hidden bg-surface-container-low/95 dark:bg-surface-container-low/95 rounded-t-xl shadow-[0_-4px_20px_rgba(208,188,255,0.2)] border-t border-primary/30 backdrop-blur-md">
+<button class="flex flex-col items-center justify-center bg-primary/20 text-primary rounded-xl px-4 py-1 border border-primary/50 scale-110 duration-200">
+<span class="material-symbols-outlined mb-1 text-lg">swords</span>
+<span class="text-[10px] font-label-caps leading-none font-bold">FIGHT</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined mb-1 text-lg">target</span>
+<span class="text-[10px] font-label-caps leading-none">TRAIN</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined mb-1 text-lg">bar_chart</span>
+<span class="text-[10px] font-label-caps leading-none">STATS</span>
+</button>
+</nav>
+</body></html>

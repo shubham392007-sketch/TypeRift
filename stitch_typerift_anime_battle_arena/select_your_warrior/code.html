@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TypeRift - Select Your Warrior</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Space+Grotesk:wght@300..700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#e2e2e2",
+                      "tertiary-fixed-dim": "#4cd7f6",
+                      "primary": "#d0bcff",
+                      "tertiary-fixed": "#acedff",
+                      "on-tertiary-fixed-variant": "#004e5c",
+                      "surface-container-low": "#1b1b1b",
+                      "surface-bright": "#393939",
+                      "on-primary": "#3c0091",
+                      "secondary-container": "#a40217",
+                      "surface-container": "#1f1f1f",
+                      "on-surface": "#e2e2e2",
+                      "on-secondary-fixed": "#410004",
+                      "on-background": "#e2e2e2",
+                      "on-tertiary-container": "#002f38",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#131313",
+                      "secondary": "#ffb3ad",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#e9ddff",
+                      "surface-container-highest": "#353535",
+                      "outline": "#958ea0",
+                      "secondary-fixed-dim": "#ffb3ad",
+                      "on-surface-variant": "#cbc3d7",
+                      "inverse-primary": "#6d3bd7",
+                      "outline-variant": "#494454",
+                      "primary-fixed-dim": "#d0bcff",
+                      "tertiary": "#4cd7f6",
+                      "on-error": "#690005",
+                      "surface-variant": "#353535",
+                      "on-secondary-container": "#ffaea8",
+                      "on-secondary": "#68000a",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary": "#003640",
+                      "on-secondary-fixed-variant": "#930013",
+                      "surface": "#131313",
+                      "primary-container": "#a078ff",
+                      "tertiary-container": "#009eb9",
+                      "secondary-fixed": "#ffdad7",
+                      "inverse-on-surface": "#303030",
+                      "surface-container-high": "#2a2a2a",
+                      "error-container": "#93000a",
+                      "surface-tint": "#d0bcff",
+                      "on-tertiary-fixed": "#001f26",
+                      "background": "#131313",
+                      "on-primary-fixed-variant": "#5516be",
+                      "on-primary-container": "#340080",
+                      "on-primary-fixed": "#23005c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "panel-gap": "24px",
+                      "gutter": "16px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Space Grotesk"
+                      ],
+                      "headline-md": [
+                              "Anybody"
+                      ],
+                      "typing-area": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Anybody"
+                      ],
+                      "headline-xl": [
+                              "Anybody"
+                      ],
+                      "hud-stat": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "typing-area": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0.2em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-xl": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "hud-stat": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: radial-gradient(circle at 50% 50%, rgba(160, 120, 255, 0.05) 0%, transparent 50%),
+                              linear-gradient(0deg, rgba(19, 19, 19, 1) 0%, rgba(19, 19, 19, 0.8) 100%);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            position: absolute;
+            pointer-events: none;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(160,120,255,0.1) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .cyber-card-glow {
+            box-shadow: 0 0 20px rgba(160, 120, 255, 0.2), inset 0 0 10px rgba(160, 120, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-card-glow:hover {
+            box-shadow: 0 0 30px rgba(160, 120, 255, 0.4), inset 0 0 15px rgba(160, 120, 255, 0.2);
+            border-color: theme('colors.primary');
+            transform: translateY(-5px);
+        }
+
+        .cyber-card-glow.active {
+            box-shadow: 0 0 40px rgba(160, 120, 255, 0.6), inset 0 0 20px rgba(160, 120, 255, 0.3);
+            border-color: theme('colors.primary');
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .stat-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+
+        .glitch-text {
+            position: relative;
+        }
+
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 theme('colors.error');
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 theme('colors.tertiary');
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 80% 0); }
+            20% { clip-path: inset(60% 0 10% 0); }
+            40% { clip-path: inset(40% 0 50% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            80% { clip-path: inset(10% 0 70% 0); }
+            100% { clip-path: inset(30% 0 20% 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); }
+            20% { clip-path: inset(80% 0 5% 0); }
+            40% { clip-path: inset(30% 0 20% 0); }
+            60% { clip-path: inset(70% 0 10% 0); }
+            80% { clip-path: inset(20% 0 50% 0); }
+            100% { clip-path: inset(50% 0 30% 0); }
+        }
+        
+        .bg-cyber-grid {
+            background-image: 
+                linear-gradient(to right, rgba(208, 188, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(208, 188, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-sm overflow-hidden relative">
+<div class="scanline"></div>
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 max-w-none bg-surface-dim/80 dark:bg-surface-dim/80 text-primary dark:text-primary-fixed-dim border-b border-outline-variant/30 backdrop-blur-md shadow-[0_0_20px_rgba(208,188,255,0.1)] fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl">swords</span>
+<span class="text-headline-md font-headline-md font-black tracking-tighter text-primary dark:text-primary uppercase glitch-text" data-text="TYPERIFT">TYPERIFT</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary hover:bg-primary-container/20 px-3 py-2 rounded transition-all duration-300" href="#">ARENA</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary hover:bg-primary-container/20 px-3 py-2 rounded transition-all duration-300" href="#">PRACTICE</a>
+<a class="text-primary border-b-2 border-primary font-label-caps text-label-caps hover:bg-primary-container/20 px-3 py-2 rounded transition-all duration-300 brightness-125" href="#">WARRIORS</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary hover:bg-primary-container/20 px-3 py-2 rounded transition-all duration-300" href="#">LEADERBOARD</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-xl hover:text-primary transition-colors">settings</button>
+<button class="material-symbols-outlined text-xl hover:text-primary transition-colors">history</button>
+<button class="material-symbols-outlined text-xl hover:text-primary transition-colors">person</button>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop if configured, but keeping TopNav primary for this view based on design system logic) -->
+<!-- Suppressed SideNav based on Semantic Shell Mandate: The user is in a focused selection screen, top nav provides enough context. -->
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col pt-24 pb-24 md:pb-16 px-4 md:px-margin-desktop relative z-10 bg-cyber-grid">
+<div class="w-full max-w-7xl mx-auto flex flex-col h-full">
+<header class="mb-8 flex items-center gap-4 border-b border-outline-variant/30 pb-4">
+<span class="text-secondary font-headline-md text-headline-md font-bold italic block">// SELECT YOUR WARRIOR</span>
+<div class="h-px bg-secondary flex-1 opacity-30"></div>
+<span class="text-on-surface-variant font-label-caps text-label-caps opacity-50">戦士を選択</span>
+</header>
+<!-- Character Selection Container -->
+<div class="flex-1 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 relative">
+<!-- Navigation Arrows (Desktop) -->
+<button class="hidden md:flex absolute left-0 z-20 w-12 h-12 items-center justify-center bg-surface-container/50 border border-outline-variant/50 hover:border-primary text-primary rounded-full backdrop-blur-md transition-all hover:scale-110">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<button class="hidden md:flex absolute right-0 z-20 w-12 h-12 items-center justify-center bg-surface-container/50 border border-outline-variant/50 hover:border-primary text-primary rounded-full backdrop-blur-md transition-all hover:scale-110">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</button>
+<!-- Character Card 1: Blaze Mage -->
+<div class="group relative w-full max-w-[300px] aspect-[3/4] bg-surface-container-low border border-outline-variant/30 rounded-xl overflow-hidden cyber-card-glow cursor-pointer" onclick="selectCharacter(this)">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/80 to-transparent z-10"></div>
+<img alt="A fierce anime-style mage character cloaked in intense fiery red and orange energy, standing dynamically against a dark, ember-filled background. The lighting is dramatic and warm, highlighting intense glowing effects typical of modern cyberpunk manga aesthetics." class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-[.active]:opacity-100 mix-blend-luminosity group-[.active]:mix-blend-normal" data-alt="A fierce anime-style mage character cloaked in intense fiery red and orange energy, standing dynamically against a dark, ember-filled background. The lighting is dramatic and warm, highlighting intense glowing effects typical of modern cyberpunk manga aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLbXyX6BsUSWULnkX1TG8vxjgO86V1YVvRgvr_D2FtSvJ6ZzzDuQRIDnTJDVAXbehVreLBuFbwFuLTbTWL4cBXaVPZhhwddBHfdCW8CRRZR9-nSlzmWin1hAJ-oJ-VTXdt7BizQJlvQ9Zxd0S0W4PPWdlLiVKkOpAYraQ2tvK1Uum9y7jocbl0FsinP4nLSfXFnA_e0rnjJ81F_qGnhrcewxeYksLhAOQd3jdMpdgURgyQBqO6c-dg2SXDKpF4J2mZZCAJD0T18la-"/>
+<div class="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-secondary-container/80 border border-secondary flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-on-secondary-container text-sm">local_fire_department</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 z-20 flex flex-col gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface uppercase tracking-wider group-[.active]:text-secondary transition-colors">BLAZE MAGE</h3>
+<p class="font-label-caps text-label-caps text-secondary/70">ブレイズメイジ</p>
+</div>
+<div class="flex flex-col gap-2 w-full">
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">POWER</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">SPEED</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">MAGIC</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-secondary w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">DEFENSE</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Character Card 2: Shadow Assassin (Active) -->
+<div class="group active relative w-full max-w-[300px] aspect-[3/4] bg-surface-container-low border border-primary rounded-xl overflow-hidden cyber-card-glow cursor-pointer" onclick="selectCharacter(this)">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/60 to-transparent z-10"></div>
+<img alt="A stealthy anime-style assassin character surrounded by deep purple and dark black ethereal shadows, standing in a sleek, high-tech urban cyberpunk alleyway. The lighting is stark with intense neon purple highlights, creating a moody, dangerous atmosphere." class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-100 group-[.active]:opacity-100 mix-blend-normal" data-alt="A stealthy anime-style assassin character surrounded by deep purple and dark black ethereal shadows, standing in a sleek, high-tech urban cyberpunk alleyway. The lighting is stark with intense neon purple highlights, creating a moody, dangerous atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6UKpJV4u5mIh_GnnToloB9sQQvlaJ62gOt-DYF4kXx_WWQUETHdavKviMlxYuJvIXw6VSfOjB7wGu53N_7Qdlj-Tbn1MDoA5fuql4JjRULEAzyQdZjJIXdsB1ApSRKULg10UO1jH0MItEEVf_vjInWMEjeB38Po5OadxlAy1BITC2Li3KSSLNGz7CqZUd_HBexJiKTkdKl66D-MUV1P6RUJXCAJ-tbo49mt9bEQr4YahVUzcRrLSv4j3yL0ydGeUE25PfShYDAkzY"/>
+<div class="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-primary-container/80 border border-primary flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(208,188,255,0.8)]">
+<span class="material-symbols-outlined text-on-primary-container text-sm">visibility_off</span>
+</div>
+<!-- Scanline effect for active card -->
+<div class="absolute inset-0 z-15 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSJ0cmFuc3BhcmVudCIvPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDIwOCwgMTg4LCAyNTUsIDAuMSkiLz4KPC9zdmc+')] opacity-50 pointer-events-none hidden group-[.active]:block"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 z-20 flex flex-col gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface uppercase tracking-wider group-[.active]:text-primary transition-colors drop-shadow-[0_0_8px_rgba(208,188,255,0.8)]">SHADOW ASSASSIN</h3>
+<p class="font-label-caps text-label-caps text-primary/70">シャドウアサシン</p>
+</div>
+<div class="flex flex-col gap-2 w-full">
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16 group-[.active]:text-primary-fixed-dim">POWER</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5 shadow-[0_0_5px_rgba(208,188,255,0.3)]">
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16 group-[.active]:text-primary-fixed-dim">SPEED</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5 shadow-[0_0_5px_rgba(208,188,255,0.3)]">
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16 group-[.active]:text-primary-fixed-dim">MAGIC</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5 shadow-[0_0_5px_rgba(208,188,255,0.3)]">
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16 group-[.active]:text-primary-fixed-dim">DEFENSE</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5 shadow-[0_0_5px_rgba(208,188,255,0.3)]">
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-primary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Character Card 3: Thunder Samurai -->
+<div class="group relative w-full max-w-[300px] aspect-[3/4] bg-surface-container-low border border-outline-variant/30 rounded-xl overflow-hidden cyber-card-glow cursor-pointer" onclick="selectCharacter(this)">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/80 to-transparent z-10"></div>
+<img alt="A stoic anime-style samurai character crackling with bright electric blue and white lightning energy, standing in a minimalist, high-tech dojo environment. The lighting is cool and sharp, emphasizing the cybernetic enhancements and sleek metallic textures of their armor." class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-[.active]:opacity-100 mix-blend-luminosity group-[.active]:mix-blend-normal" data-alt="A stoic anime-style samurai character crackling with bright electric blue and white lightning energy, standing in a minimalist, high-tech dojo environment. The lighting is cool and sharp, emphasizing the cybernetic enhancements and sleek metallic textures of their armor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMrESflqib2IEXUG5gZXDCBWKmFBH8PSbEs_y1OkEqqn46N3uv0zxmZybn0PZe0r7Ey1U5-yH6ymJJnN0dRQZgAmplfvj_tgI31yE_qrDXaMVfNC17Xsxa6116tCrG-Nt4Eck8gb6wP6esVlIHiJYIF9d1bVNT_nw0pLJZeeBShLnMbxjgllSDRN1AjhUql7uZw_IiiFThSx5K_r6xbqdqbGzvMdbn8kI4xfdNGawoksEpuV5eoepdVzox1ab3d3pu91pJ1qAI5GAw"/>
+<div class="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-tertiary-container/80 border border-tertiary flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm">bolt</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6 z-20 flex flex-col gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface uppercase tracking-wider group-[.active]:text-tertiary transition-colors">THUNDER SAMURAI</h3>
+<p class="font-label-caps text-label-caps text-tertiary/70">サンダーサムライ</p>
+</div>
+<div class="flex flex-col gap-2 w-full">
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">POWER</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">SPEED</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">MAGIC</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<span class="font-hud-stat text-[10px] text-on-surface-variant uppercase w-16">DEFENSE</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-tertiary w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+<div class="h-full bg-surface-variant w-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-12 flex justify-center w-full">
+<button class="relative group overflow-hidden bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold py-4 px-16 rounded border border-primary hover:bg-primary transition-colors shadow-[0_0_20px_rgba(208,188,255,0.3)] hover:shadow-[0_0_30px_rgba(208,188,255,0.6)]">
+<span class="relative z-10 flex items-center gap-2">
+                        CONFIRM <span class="material-symbols-outlined">double_arrow</span>
+</span>
+<!-- Slash Effect -->
+<div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-white opacity-20 group-hover:animate-[slash_0.5s_ease-in-out]"></div>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Visible on Mobile, Hidden on Desktop) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe md:hidden bg-surface-container-low/95 dark:bg-surface-container-low/95 border-t border-primary/30 backdrop-blur-md shadow-[0_-4px_20px_rgba(208,188,255,0.2)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">swords</span>
+<span class="text-label-caps font-label-caps mt-1">FIGHT</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">target</span>
+<span class="text-label-caps font-label-caps mt-1">TRAIN</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary/20 text-primary rounded-xl px-4 py-1 border border-primary/50 scale-110 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-label-caps font-label-caps mt-1">WARRIORS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-label-caps font-label-caps mt-1">STATS</span>
+</a>
+</nav>
+<style>
+        @keyframes slash {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+    </style>
+<script>
+        function selectCharacter(element) {
+            // Remove active class from all cards
+            document.querySelectorAll('.cyber-card-glow').forEach(card => {
+                card.classList.remove('active');
+                card.classList.remove('border-primary');
+                card.classList.add('border-outline-variant/30');
+            });
+            
+            // Add active class to clicked card
+            element.classList.add('active');
+            element.classList.remove('border-outline-variant/30');
+            
+            // Determine active color border based on selection
+            if(element.querySelector('h3').innerText === 'BLAZE MAGE') {
+                element.classList.add('border-secondary');
+            } else if (element.querySelector('h3').innerText === 'THUNDER SAMURAI') {
+                element.classList.add('border-tertiary');
+            } else {
+                element.classList.add('border-primary');
+            }
+        }
+    </script>
+</body></html>

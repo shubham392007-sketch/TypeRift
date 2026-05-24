@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #05030a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(139, 44, 255, 0.22), transparent 28%),
+    #05030a;
+  color: white;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(255, 45, 223, 0.45);
+  color: white;
+}
+
+.opacity-18 {
+  opacity: 0.18;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
