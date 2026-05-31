@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TypeRift - Profile &amp; Armory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "surface-container-highest": "#353535",
+                        "surface-bright": "#393939",
+                        "on-primary": "#3c0091",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-primary-fixed": "#23005c",
+                        "primary-container": "#a078ff",
+                        "surface-tint": "#d0bcff",
+                        "outline-variant": "#494454",
+                        "on-tertiary-container": "#002f38",
+                        "on-secondary-fixed": "#410004",
+                        "secondary-fixed": "#ffdad7",
+                        "on-secondary-container": "#ffaea8",
+                        "secondary-container": "#a40217",
+                        "tertiary-fixed": "#acedff",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#009eb9",
+                        "on-secondary": "#68000a",
+                        "surface-container": "#1f1f1f",
+                        "secondary": "#ffb3ad",
+                        "on-secondary-fixed-variant": "#930013",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container-low": "#1b1b1b",
+                        "surface": "#131313",
+                        "primary": "#d0bcff",
+                        "on-tertiary": "#003640",
+                        "on-primary-container": "#340080",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary": "#4cd7f6",
+                        "on-surface": "#e2e2e2",
+                        "outline": "#958ea0",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "on-background": "#e2e2e2",
+                        "surface-variant": "#353535",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#303030",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5516be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "panel-gap": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Anybody"],
+                        "hud-stat": ["JetBrains Mono"],
+                        "headline-md": ["Anybody"],
+                        "typing-area": ["JetBrains Mono"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-lg": ["Anybody"],
+                        "body-sm": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "hud-stat": ["18px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "typing-area": ["40px", { "lineHeight": "1.5", "letterSpacing": "0.2em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    },
+                    "backgroundImage": {
+                        'cyber-grid': 'linear-gradient(rgba(208, 188, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(208, 188, 255, 0.1) 1px, transparent 1px)',
+                        'scanlines': 'linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 50%)',
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .cyber-panel {
+            background: rgba(14, 14, 14, 0.6);
+            border: 1px solid rgba(208, 188, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .cyber-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(76, 215, 246, 0.03) 2px, rgba(76, 215, 246, 0.03) 4px);
+            pointer-events: none;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(76, 215, 246, 0.6);
+        }
+        .slash-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(208, 188, 255, 0.5), transparent);
+            transform: skewX(-45deg);
+        }
+        .clip-angled {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen relative overflow-x-hidden font-body-sm bg-[length:40px_40px] bg-cyber-grid">
+<!-- Atmospheric Effects -->
+<div class="fixed inset-0 pointer-events-none bg-scanlines bg-[length:100%_4px] opacity-20 z-0"></div>
+<div class="fixed inset-0 pointer-events-none radial-gradient(circle at center, transparent 0%, rgba(19, 19, 19, 0.8) 100%) z-0"></div>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-full py-8 gap-panel-gap bg-surface-container-lowest/90 dark:bg-surface-container-lowest/90 backdrop-blur-2xl fixed left-0 top-0 w-64 z-50 border-r border-primary/20 shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+<div class="px-gutter text-center mb-8">
+<h1 class="font-headline-lg text-headline-lg text-primary glow-text">NEON_STRIKER</h1>
+<p class="font-label-caps text-label-caps text-tertiary mt-2">RANK: ELITE III</p>
+</div>
+<div class="flex flex-col gap-2 px-4 w-full">
+<a class="flex items-center gap-4 p-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">swords</span>
+<span class="font-label-caps text-label-caps group-hover:translate-x-1 duration-300">Battle Arena</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">target</span>
+<span class="font-label-caps text-label-caps group-hover:translate-x-1 duration-300">Practice</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">military_tech</span>
+<span class="font-label-caps text-label-caps group-hover:translate-x-1 duration-300">Leaderboard</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">shield</span>
+<span class="font-label-caps text-label-caps group-hover:translate-x-1 duration-300">Armory</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container shadow-[0_0_15px_rgba(160,120,255,0.5)] border-l-4 border-primary group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">person</span>
+<span class="font-label-caps text-label-caps group-hover:translate-x-1 duration-300">Profile</span>
+</a>
+</div>
+<div class="mt-auto px-4 w-full">
+<button class="w-full py-3 bg-tertiary/20 border border-tertiary text-tertiary font-label-caps text-label-caps rounded clip-angled hover:bg-tertiary/40 transition-colors shadow-[0_0_10px_rgba(76,215,246,0.3)]">
+                GO_TO_RIFT
+            </button>
+</div>
+</nav>
+<!-- TopAppBar (Mobile Fallback) -->
+<header class="md:hidden flex justify-between items-center px-gutter py-4 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-primary/30 shadow-[0_4px_20px_rgba(109,59,215,0.4)] fixed top-0">
+<span class="font-headline-xl text-headline-xl italic tracking-tighter text-primary dark:text-primary drop-shadow-[0_0_10px_rgba(208,188,255,0.8)] text-2xl">TypeRift</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-tertiary transition-colors">settings</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 md:pt-8 p-4 md:p-8 min-h-screen relative z-10 flex flex-col xl:flex-row gap-8">
+<!-- Left Column: Character Hangar -->
+<section class="flex-1 flex flex-col gap-6">
+<div class="cyber-panel p-6 rounded-lg clip-angled flex flex-col items-center justify-center relative min-h-[500px]">
+<div class="absolute top-4 left-4 font-hud-stat text-hud-stat text-tertiary opacity-70">UNIT_01 // ACTIVE</div>
+<div class="absolute bottom-4 right-4 font-hud-stat text-hud-stat text-primary opacity-50">SYS.READY</div>
+<!-- Character Placeholder -->
+<div class="w-full max-w-sm aspect-[3/4] bg-surface-container-high rounded border border-primary/30 relative overflow-hidden flex items-center justify-center shadow-[inset_0_0_50px_rgba(0,0,0,0.8)]">
+<img alt="Warrior Sprite" class="w-full h-full object-cover mix-blend-luminosity opacity-80" data-alt="A highly detailed anime-style cyberpunk warrior standing in a dark, high-tech mecha hangar. The character wears sleek, metallic black and dark purple power armor with glowing neon cyan accents. Dramatic, cinematic top-down lighting casts deep shadows, emphasizing the gritty, battle-worn texture of the suit. The mood is tense and combat-ready, embodying a modern cyberpunk aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe2LmcYCt45mO0TEkQAVR_3UUF8lIdJ0VKDax3e2Gl8cA1DQ0N9ozQRhyPBcAv51GooGTllZEmLW2n_9n5CQnow3KdOH3QJneEi87Saz00mqGzdQMRDpZLH6FYORoSrzp1dvBBdBKFWA317TsgcQ3_MMmmxKZ4J2kiYGbt5M6kkbRYHi5BYU3LVKswcnUfTFgBvaqyP9k5515U6qc6sj77_jk3a97rOztmATsuwBegfclUE5KB_5dNvgDbfWmjow2AVUNuJZm5kH6d"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="mt-6 text-center w-full">
+<h2 class="font-headline-md text-headline-md text-primary glow-text uppercase tracking-widest">Cipher_Blade</h2>
+<div class="slash-divider my-4 mx-auto w-3/4"></div>
+<div class="flex justify-center gap-8">
+<div class="text-center">
+<div class="font-label-caps text-label-caps text-on-surface-variant">LEVEL</div>
+<div class="font-hud-stat text-hud-stat text-tertiary mt-1">42</div>
+</div>
+<div class="text-center">
+<div class="font-label-caps text-label-caps text-on-surface-variant">CLASS</div>
+<div class="font-hud-stat text-hud-stat text-tertiary mt-1">STRIKER</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Armory / Cosmetic Upgrades -->
+<div class="cyber-panel p-6 rounded-lg">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">shield</span> ARMORY
+                </h3>
+<div class="grid grid-cols-4 gap-4">
+<div class="aspect-square bg-surface-container-highest border border-tertiary/50 rounded flex flex-col items-center justify-center cursor-pointer hover:bg-tertiary/20 transition-colors group">
+<span class="material-symbols-outlined text-tertiary text-3xl group-hover:scale-110 transition-transform">keyboard</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-2">SWITCHES</span>
+</div>
+<div class="aspect-square bg-surface-container-highest border border-primary/30 rounded flex flex-col items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">palette</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-2">AURA</span>
+</div>
+<div class="aspect-square bg-surface-container-highest border border-primary/30 rounded flex flex-col items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">token</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-2">RELICS</span>
+</div>
+<div class="aspect-square bg-surface-container-highest border border-primary/30 rounded flex flex-col items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors opacity-50">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">lock</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-2">LOCKED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Stats & Data -->
+<section class="flex-1 flex flex-col gap-6 xl:max-w-lg">
+<!-- Core Stats Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="cyber-panel p-4 rounded-lg clip-angled">
+<div class="font-label-caps text-label-caps text-on-surface-variant">W/L RATIO</div>
+<div class="font-headline-lg text-headline-lg text-tertiary glow-text mt-2">2.4<span class="text-lg opacity-50">/1</span></div>
+<div class="w-full h-1 bg-surface-container-highest mt-2 rounded overflow-hidden">
+<div class="h-full bg-tertiary w-[70%]"></div>
+</div>
+</div>
+<div class="cyber-panel p-4 rounded-lg clip-angled">
+<div class="font-label-caps text-label-caps text-on-surface-variant">TOTAL DMG</div>
+<div class="font-headline-lg text-headline-lg text-primary glow-text mt-2">84.2K</div>
+<div class="font-hud-stat text-xs text-on-surface-variant mt-2">+12% THIS WEEK</div>
+</div>
+</div>
+<!-- Radar Chart Placeholder (CSS Art Fallback) -->
+<div class="cyber-panel p-6 rounded-lg flex flex-col items-center">
+<h3 class="font-headline-md text-headline-md text-primary w-full text-left mb-6">COMBAT METRICS</h3>
+<div class="relative w-48 h-48 my-4">
+<!-- Hexagon Base -->
+<div class="absolute inset-0 bg-surface-container-highest opacity-20" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); border: 1px solid rgba(208,188,255,0.3)"></div>
+<!-- Data Polygon -->
+<div class="absolute inset-0 bg-tertiary/30 backdrop-blur-sm shadow-[0_0_15px_rgba(76,215,246,0.4)] transition-all duration-1000" style="clip-path: polygon(50% 20%, 80% 30%, 90% 70%, 50% 90%, 20% 60%, 30% 20%); border: 1px solid var(--tw-color-tertiary)"></div>
+<!-- Labels -->
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-caps text-[10px] text-tertiary">SPEED</span>
+<span class="absolute top-1/4 -right-8 font-label-caps text-[10px] text-primary">POWER</span>
+<span class="absolute bottom-1/4 -right-8 font-label-caps text-[10px] text-primary">MAGIC</span>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-label-caps text-[10px] text-tertiary">DEFENSE</span>
+<span class="absolute bottom-1/4 -left-8 font-label-caps text-[10px] text-primary">ACCURACY</span>
+<span class="absolute top-1/4 -left-8 font-label-caps text-[10px] text-primary">WPM</span>
+</div>
+</div>
+<!-- Favorite Words / Analytics -->
+<div class="cyber-panel p-6 rounded-lg">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4">FREQUENT COMBOS (FAV WORDS)</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 border border-primary/40 text-primary font-hud-stat text-sm rounded bg-primary/10">SYNCHRONIZE</span>
+<span class="px-3 py-1 border border-tertiary/40 text-tertiary font-hud-stat text-sm rounded bg-tertiary/10">OBLITERATE</span>
+<span class="px-3 py-1 border border-primary/20 text-on-surface-variant font-hud-stat text-sm rounded bg-surface-container">VELOCITY</span>
+<span class="px-3 py-1 border border-primary/20 text-on-surface-variant font-hud-stat text-sm rounded bg-surface-container">QUANTUM</span>
+</div>
+</div>
+<!-- Achievements -->
+<div class="cyber-panel p-6 rounded-lg">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">emoji_events</span> BADGES
+                </h3>
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<div class="min-w-[80px] h-20 bg-surface-container-highest rounded-full border-2 border-tertiary flex items-center justify-center shadow-[0_0_15px_rgba(76,215,246,0.3)] relative group">
+<span class="material-symbols-outlined text-tertiary text-3xl group-hover:scale-110 transition-transform">bolt</span>
+<div class="absolute -bottom-6 font-label-caps text-[10px] text-tertiary whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">100 WPM</div>
+</div>
+<div class="min-w-[80px] h-20 bg-surface-container-highest rounded-full border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(208,188,255,0.3)] relative group">
+<span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">military_tech</span>
+<div class="absolute -bottom-6 font-label-caps text-[10px] text-primary whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">VETERAN</div>
+</div>
+<div class="min-w-[80px] h-20 bg-surface-container-highest rounded-full border-2 border-surface-variant flex items-center justify-center opacity-50 relative group">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl group-hover:scale-110 transition-transform">lock</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden flex justify-around items-center w-full px-4 fixed bottom-0 z-50 h-20 bg-surface-container-high/95 dark:bg-surface-container-high/95 backdrop-blur-md border-t border-primary/40 shadow-[0_-4px_25px_rgba(109,59,215,0.3)]">
+<a class="text-on-surface-variant dark:text-outline flex flex-col items-center justify-center hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1 text-[10px]">Home</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline flex flex-col items-center justify-center hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-label-caps text-label-caps mt-1 text-[10px]">Missions</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline flex flex-col items-center justify-center hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps mt-1 text-[10px]">Social</span>
+</a>
+<a class="text-tertiary dark:text-tertiary flex flex-col items-center justify-center scale-110 drop-shadow-[0_0_8px_rgba(76,215,246,0.8)] active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1 text-[10px]">Profile</span>
+</a>
+</nav>
+</body></html>

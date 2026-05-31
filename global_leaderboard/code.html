@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TypeRift - Global Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "surface-container-highest": "#353535",
+                        "surface-bright": "#393939",
+                        "on-primary": "#3c0091",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-primary-fixed": "#23005c",
+                        "primary-container": "#a078ff",
+                        "surface-tint": "#d0bcff",
+                        "outline-variant": "#494454",
+                        "on-tertiary-container": "#002f38",
+                        "on-secondary-fixed": "#410004",
+                        "secondary-fixed": "#ffdad7",
+                        "on-secondary-container": "#ffaea8",
+                        "secondary-container": "#a40217",
+                        "tertiary-fixed": "#acedff",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#009eb9",
+                        "on-secondary": "#68000a",
+                        "surface-container": "#1f1f1f",
+                        "secondary": "#ffb3ad",
+                        "on-secondary-fixed-variant": "#930013",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container-low": "#1b1b1b",
+                        "surface": "#131313",
+                        "primary": "#d0bcff",
+                        "on-tertiary": "#003640",
+                        "on-primary-container": "#340080",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary": "#4cd7f6",
+                        "on-surface": "#e2e2e2",
+                        "outline": "#958ea0",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "on-background": "#e2e2e2",
+                        "surface-variant": "#353535",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#303030",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5516be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "panel-gap": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Anybody"],
+                        "hud-stat": ["JetBrains Mono"],
+                        "headline-md": ["Anybody"],
+                        "typing-area": ["JetBrains Mono"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-lg": ["Anybody"],
+                        "body-sm": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "hud-stat": ["18px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "typing-area": ["40px", { "lineHeight": "1.5", "letterSpacing": "0.2em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .glitch-hover:hover {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: theme('colors.tertiary');
+        }
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-5deg); }
+            40% { transform: skew(5deg); }
+            60% { transform: skew(-2deg); }
+            80% { transform: skew(2deg); }
+            100% { transform: skew(0deg); }
+        }
+        .manga-panel {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+        }
+        .slash-divider {
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, theme('colors.primary/0.3') 2px, theme('colors.primary/0.3') 4px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen relative overflow-x-hidden selection:bg-tertiary selection:text-on-tertiary-fixed font-body-sm text-body-sm">
+<!-- Background Layer Level 0 -->
+<div class="fixed inset-0 z-[-2] bg-cover bg-center opacity-40 mix-blend-luminosity" data-alt="A dark, rainy cyberpunk cityscape at night. Towering brutalist skyscrapers disappear into smog and fog. Neon signs in vivid cyan and magenta cast long, vibrant reflections on wet asphalt streets. The mood is gritty, atmospheric, and high-tech, fitting a high-octane dark anime aesthetic. Scanlines and subtle digital noise texture the view." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADoaJ_V3TlQOhIs_CawZo400aBOuM-lhUtpYczrmWseMPUCCFCET84UTNm9oNPo748-zzDmGcR_iUYy7MGI40xBbdXS4LBcZoMOfECoNxR-X-ixMZy8LN4UciNsrqN1roFzvgCPul0yN9ff6Er-euMKBQrh93zVinaWBKs273ChfIqmCZ4ShfujLDa4Vdsj_gyror8XZRJ3p15bkhQUfiwuYn731kpatbywRAR9UtRGOTRmG5SXD91S05yPnwIQ_sJk4_xTRCWIyg0');">
+</div>
+<div class="fixed inset-0 z-[-1] scanlines"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-primary/30 dark:border-primary/20 bg-gradient-to-r from-surface-container-lowest via-surface-container to-surface-container-lowest shadow-[0_4px_20px_rgba(109,59,215,0.4)] transition-all duration-300 ease-out active:scale-95 hidden md:flex justify-between items-center px-gutter py-4 max-w-[1920px] mx-auto">
+<div class="font-headline-xl text-headline-xl italic tracking-tighter text-primary dark:text-primary drop-shadow-[0_0_10px_rgba(208,188,255,0.8)]">TypeRift</div>
+<nav class="flex gap-8">
+<a class="text-on-surface-variant dark:text-outline font-headline-md text-headline-md hover:text-tertiary dark:hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(76,215,246,0.6)] flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">home</span> Home
+            </a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary font-headline-md text-headline-md hover:text-tertiary dark:hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(76,215,246,0.6)] flex items-center gap-2" href="#">
+<span class="material-symbols-outlined">leaderboard</span> Leaderboard
+            </a>
+</nav>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim">
+<button class="hover:text-tertiary dark:hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(76,215,246,0.6)] transition-all"><span class="material-symbols-outlined text-[32px]">leaderboard</span></button>
+<button class="hover:text-tertiary dark:hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(76,215,246,0.6)] transition-all"><span class="material-symbols-outlined text-[32px]">settings</span></button>
+<button class="hover:text-tertiary dark:hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(76,215,246,0.6)] transition-all"><span class="material-symbols-outlined text-[32px]">account_circle</span></button>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop as part of Shell) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container-lowest/90 dark:bg-surface-container-lowest/90 backdrop-blur-2xl border-r border-primary/20 shadow-[10px_0_30px_rgba(0,0,0,0.5)] hidden lg:flex flex-col py-8 gap-panel-gap pt-28">
+<div class="px-6 mb-4 flex flex-col items-center">
+<div class="w-20 h-20 rounded-full border-2 border-primary overflow-hidden mb-2 shadow-[0_0_15px_rgba(208,188,255,0.4)]">
+<img alt="Player Character Avatar" class="w-full h-full object-cover" data-alt="A stylized, close-up portrait of a cyberpunk character wearing a sleek, neon-lit visor. The color palette is dominated by deep blacks, electric purples, and vibrant cyans. The art style is high-contrast anime/manga, with sharp lines and glowing technical details on their futuristic armor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrM_whWoX4J7TguZLj3aj7B0DpS-EJxj3IXPXy3s09tnVcWi8sXD6bcE_m39kJs71lWUVPOCFrPzks-RUeZwxPBSbl5_acnIzUaS0TaDLb0RTcVO83TccG9OY6_wg9ouVlxGqOou7-YUspQGGnEewN2lm_OAUq1rB1QJ6tf7a96sMnKNhfDff5F0LZJi0xGQT4DdBrfkaGDP9l8-rMcc3JFMXGKdVyagOpoLSBGSHw4ChNDd_gqgrU0_L2ZU_dsJ6fFLWO_EgWJQF8"/>
+</div>
+<div class="font-headline-md text-headline-md text-primary text-center leading-tight">NEON_STRIKER</div>
+<div class="font-hud-stat text-hud-stat text-tertiary text-sm mt-1">RANK: ELITE III</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 px-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">swords</span> Battle Arena
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">target</span> Practice
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container shadow-[0_0_15px_rgba(160,120,255,0.5)] border-l-4 border-primary transition-all duration-200 group font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">military_tech</span> Leaderboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">shield</span> Armory
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">person</span> Profile
+            </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-3 bg-tertiary text-on-tertiary font-label-caps text-label-caps uppercase tracking-widest manga-panel hover:bg-tertiary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">rocket_launch</span> GO_TO_RIFT
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-20 md:pt-28 pb-24 md:pb-8 min-h-screen flex flex-col px-margin-mobile md:px-margin-desktop gap-panel-gap max-w-[1920px] mx-auto relative z-10">
+<!-- Top 'Legendary' Rank Hero Banner -->
+<section class="w-full flex flex-col md:flex-row bg-surface-container/60 border border-primary/40 manga-panel backdrop-blur-md relative overflow-hidden">
+<!-- Aura/Glow background -->
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container/20 to-tertiary-container/20 mix-blend-screen pointer-events-none"></div>
+<!-- Character Avatar -->
+<div class="w-full md:w-1/3 h-64 md:h-auto relative">
+<img alt="Legendary Player Avatar" class="w-full h-full object-cover grayscale opacity-80" data-alt="A fierce, anime-style cyberpunk warrior character shown from the chest up, enveloped in a glowing, ethereal aura of cyan and magenta digital energy. They are wearing high-tech combat gear with metallic textures and glowing circuitry lines. The background is a dark void, emphasizing the bright neon lighting on the character." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOdKq8IfCaw_iovEGfSn4OyN8OlpRJU1ZY9nnon9KqatLpHYf36VPq1kCUhMHZKGUjM1llmKvdKmDuj00KRWgmZqlg2K493uFCSTQo9UTmIQd4ZeMxLm95WXCrsVQJOu-Ymf4tzmPGNxedSqG_Jivztnaimk7EcLD-_cwyWLJq8iFlx1ctH6SnXZxT_qGiXUw0yklXqED-j-gZnI5K6nHkcNHDNxtezvZsKPeT1KcCwRL4s1psBMyyVHImScPSE7JqgDcxqdtrHUD-"/>
+<div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container to-transparent"></div>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary font-hud-stat text-hud-stat px-2 py-1 shadow-[0_0_10px_rgba(76,215,246,0.8)]">
+                    #1 GLOBAL
+                </div>
+</div>
+<!-- Stats Panel -->
+<div class="w-full md:w-2/3 p-6 md:p-8 flex flex-col justify-center relative z-10">
+<div class="font-label-caps text-label-caps text-tertiary mb-2 tracking-[0.2em] uppercase">Current Champion</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-4 glitch-hover cursor-default">VOID_RUNNER</h1>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+<div class="bg-surface-container-low/80 p-4 border-l-2 border-primary">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">AVG WPM</div>
+<div class="font-hud-stat text-hud-stat text-white text-2xl">245.8</div>
+</div>
+<div class="bg-surface-container-low/80 p-4 border-l-2 border-tertiary">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">ACCURACY</div>
+<div class="font-hud-stat text-hud-stat text-white text-2xl">99.9%</div>
+</div>
+<div class="bg-surface-container-low/80 p-4 border-l-2 border-secondary">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">RIFT POINTS</div>
+<div class="font-hud-stat text-hud-stat text-white text-2xl">1,402,990</div>
+</div>
+<div class="bg-surface-container-low/80 p-4 border-l-2 border-primary">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">WIN STREAK</div>
+<div class="font-hud-stat text-hud-stat text-white text-2xl">142</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Leaderboard Table Section -->
+<section class="flex flex-col gap-4">
+<!-- Tabs & Filters -->
+<div class="flex flex-wrap items-center justify-between border-b border-surface-variant pb-2 gap-4">
+<div class="flex gap-6">
+<button class="font-headline-md text-headline-md text-primary border-b-2 border-primary pb-1 shadow-[0_4px_10px_-4px_rgba(208,188,255,0.6)]">Global</button>
+<button class="font-headline-md text-headline-md text-on-surface-variant hover:text-tertiary transition-colors pb-1">Regional</button>
+<button class="font-headline-md text-headline-md text-on-surface-variant hover:text-tertiary transition-colors pb-1">Friends</button>
+</div>
+<div class="flex items-center bg-surface-container-high px-4 py-2 rounded-sm border border-outline-variant focus-within:border-tertiary transition-colors">
+<span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span>
+<input class="bg-transparent border-none text-body-sm text-on-surface focus:ring-0 placeholder:text-outline w-48 font-hud-stat" placeholder="Search Warriors..." type="text"/>
+</div>
+</div>
+<!-- Table Container (Glassmorphism) -->
+<div class="bg-surface-container/40 backdrop-blur-md border border-outline-variant/30 rounded-lg overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/80 border-b border-primary/20">
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant w-20 text-center">RANK</th>
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant">WARRIOR</th>
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant text-right">AVG WPM</th>
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant text-right">ACCURACY</th>
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant text-right">RIFT POINTS</th>
+</tr>
+</thead>
+<tbody class="font-hud-stat text-hud-stat">
+<!-- Row 2 -->
+<tr class="border-b border-surface-variant/50 hover:bg-primary/10 transition-colors group">
+<td class="p-4 text-center text-xl text-outline">#2</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-variant border border-primary/50 overflow-hidden manga-panel">
+<img alt="Avatar 2" class="w-full h-full object-cover" data-alt="A portrait of an anime cyber-ninja wearing a sleek, dark metallic mask with a glowing magenta visor line. The background is a subtle grid pattern. Colors are high contrast neon pink and deep violet." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAB-WQbXtlzsDBoyLgf-ZVaZq_ks00lAXxeq3xA_HQnpAJN65rDpH4OkRJMVx9pKBGdoZPu41888rPb0Zl2ZScG9bhSYE9wznR3PmBqfiJMdkGQmVj9gUwy-Y_dC_KXeH29VGrN_kgiMKVzMrr4DoYbzA8eUaW05OVMq7BpCbFBz8XmtZZMeFoN8lU4NjbjYNGCUzsCXuKch-U_12yySnsW1k4xPbnDoIzT2WGYkfTogqojnudnUxqs5oPEJyMYc6TAUjK3W4cRDoz"/>
+</div>
+<span class="text-on-surface group-hover:text-primary transition-colors">CYBER_NINJA_99</span>
+</td>
+<td class="p-4 text-right text-tertiary">238.2</td>
+<td class="p-4 text-right text-on-surface">98.5%</td>
+<td class="p-4 text-right text-primary font-bold">1,380,450</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-surface-variant/50 hover:bg-primary/10 transition-colors group">
+<td class="p-4 text-center text-xl text-outline">#3</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-variant border border-primary/50 overflow-hidden manga-panel">
+<img alt="Avatar 3" class="w-full h-full object-cover" data-alt="A rugged, futuristic mechanic character with glowing cybernetic eyes and a heavy metallic collar. Lit by stark, cold white and cyan light. The style is gritty, detailed anime art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYVjszZWzUSITG4EfluBQiYl3L1L4Rfgk9n1B5quSlSm1h5EAF63io-jzOa4KNFYb5Y7NYni8as_D-k5Zkf9OT2W5x2DYaZaWsGWY9DhjzJ7wsw1Qg90MX5PHAeVOJOrSY-j68fdXFEHx6swg6FyZRMbD_yFUxwb0tK3erOQrbOx8C3H_NL9iYRqRjjbyCtkxHNEROnhDu16-ZRMxjIrPPoOXEoC_dauoUrpbLzW3yk0bU7ufCOfeOrBC4LDqMuz4A_TQKXMGS4p6d"/>
+</div>
+<span class="text-on-surface group-hover:text-primary transition-colors">MECHA_GHOST</span>
+</td>
+<td class="p-4 text-right text-tertiary">230.1</td>
+<td class="p-4 text-right text-on-surface">99.1%</td>
+<td class="p-4 text-right text-primary font-bold">1,355,000</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-surface-variant/50 hover:bg-primary/10 transition-colors group">
+<td class="p-4 text-center text-xl text-outline">#4</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-variant border border-primary/50 overflow-hidden manga-panel">
+<div class="w-full h-full flex items-center justify-center bg-surface-container-high text-on-surface font-headline-md">S</div>
+</div>
+<span class="text-on-surface group-hover:text-primary transition-colors">SYNTH_WAVE</span>
+</td>
+<td class="p-4 text-right text-tertiary">225.7</td>
+<td class="p-4 text-right text-on-surface">97.8%</td>
+<td class="p-4 text-right text-primary font-bold">1,290,100</td>
+</tr>
+<!-- Row 5 -->
+<tr class="border-b border-surface-variant/50 hover:bg-primary/10 transition-colors group">
+<td class="p-4 text-center text-xl text-outline">#5</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-variant border border-primary/50 overflow-hidden manga-panel">
+<div class="w-full h-full flex items-center justify-center bg-surface-container-high text-on-surface font-headline-md">X</div>
+</div>
+<span class="text-on-surface group-hover:text-primary transition-colors">XX_HACKER_XX</span>
+</td>
+<td class="p-4 text-right text-tertiary">220.0</td>
+<td class="p-4 text-right text-on-surface">96.5%</td>
+<td class="p-4 text-right text-primary font-bold">1,210,800</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Load More -->
+<div class="p-4 flex justify-center bg-surface-container-lowest/50 border-t border-surface-variant">
+<button class="flex items-center gap-2 text-tertiary font-label-caps text-label-caps hover:text-tertiary-fixed transition-colors py-2 px-6 border border-tertiary/50 rounded-sm hover:bg-tertiary/10">
+<span class="material-symbols-outlined text-[18px]">expand_more</span> LOAD NEXT 50
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 h-20 bg-surface-container-high/95 dark:bg-surface-container-high/95 backdrop-blur-md border-t border-primary/40 shadow-[0_-4px_25px_rgba(109,59,215,0.3)] md:hidden flex justify-around items-center px-4">
+<a class="text-on-surface-variant dark:text-outline flex flex-col items-center justify-center hover:text-primary dark:hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">home</span> Home
+        </a>
+<a class="text-tertiary dark:text-tertiary flex flex-col items-center justify-center scale-110 drop-shadow-[0_0_8px_rgba(76,215,246,0.8)] font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">leaderboard</span> Leaderboard
+        </a>
+<a class="text-on-surface-variant dark:text-outline flex flex-col items-center justify-center hover:text-primary dark:hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">group</span> Social
+        </a>
+<a class="text-on-surface-variant dark:text-outline flex flex-col items-center justify-center hover:text-primary dark:hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined mb-1">person</span> Profile
+        </a>
+</nav>
+</body></html>

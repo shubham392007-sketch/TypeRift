@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TypeRift - Practice Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#2a2a2a",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "surface-container-highest": "#353535",
+                    "surface-bright": "#393939",
+                    "on-primary": "#3c0091",
+                    "on-surface-variant": "#cbc3d7",
+                    "on-primary-fixed": "#23005c",
+                    "primary-container": "#a078ff",
+                    "surface-tint": "#d0bcff",
+                    "outline-variant": "#494454",
+                    "on-tertiary-container": "#002f38",
+                    "on-secondary-fixed": "#410004",
+                    "secondary-fixed": "#ffdad7",
+                    "on-secondary-container": "#ffaea8",
+                    "secondary-container": "#a40217",
+                    "tertiary-fixed": "#acedff",
+                    "error-container": "#93000a",
+                    "tertiary-container": "#009eb9",
+                    "on-secondary": "#68000a",
+                    "surface-container": "#1f1f1f",
+                    "secondary": "#ffb3ad",
+                    "on-secondary-fixed-variant": "#930013",
+                    "inverse-primary": "#6d3bd7",
+                    "surface-container-low": "#1b1b1b",
+                    "surface": "#131313",
+                    "primary": "#d0bcff",
+                    "on-tertiary": "#003640",
+                    "on-primary-container": "#340080",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-fixed-dim": "#ffb3ad",
+                    "inverse-surface": "#e2e2e2",
+                    "tertiary": "#4cd7f6",
+                    "on-surface": "#e2e2e2",
+                    "outline": "#958ea0",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "on-background": "#e2e2e2",
+                    "surface-variant": "#353535",
+                    "primary-fixed": "#e9ddff",
+                    "on-tertiary-fixed": "#001f26",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#303030",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#d0bcff",
+                    "on-error": "#690005",
+                    "on-primary-fixed-variant": "#5516be"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "panel-gap": "24px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Anybody"],
+                    "hud-stat": ["JetBrains Mono"],
+                    "headline-md": ["Anybody"],
+                    "typing-area": ["JetBrains Mono"],
+                    "label-caps": ["Space Grotesk"],
+                    "headline-lg": ["Anybody"],
+                    "body-sm": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                    "hud-stat": ["18px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "typing-area": ["40px", {"lineHeight": "1.5", "letterSpacing": "0.2em", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Danger Room Grid Overlay */
+        .hologrid {
+            background-image: 
+                linear-gradient(rgba(76, 215, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(76, 215, 246, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: center;
+        }
+        
+        /* Scanline Overlay */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        /* Manga Cut Borders */
+        .manga-panel {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        .manga-panel-reverse {
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+        }
+
+        /* Graph Animation */
+        @keyframes scroll-graph {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-20%); }
+        }
+        .animate-scroll-graph {
+            animation: scroll-graph 3s linear infinite;
+        }
+
+        /* Glitch text effect */
+        .glitch-hover:hover {
+            text-shadow: 2px 0 rgba(76, 215, 246, 0.8), -2px 0 rgba(255, 180, 171, 0.8);
+            animation: glitch-anim 0.2s linear infinite;
+        }
+        @keyframes glitch-anim {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 1px) }
+            40% { transform: translate(2px, -1px) }
+            60% { transform: translate(-1px, 2px) }
+            80% { transform: translate(1px, -2px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen overflow-hidden flex relative selection:bg-tertiary selection:text-surface">
+<!-- Global CRT/Vignette Effects -->
+<div class="fixed inset-0 pointer-events-none z-[100] scanlines mix-blend-overlay opacity-50"></div>
+<div class="fixed inset-0 pointer-events-none z-[99] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(19,19,19,0.8)_100%)]"></div>
+<!-- SHARED COMPONENT: SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-64 z-50 border-r border-primary/20 bg-surface-container-lowest/90 dark:bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[10px_0_30px_rgba(0,0,0,0.5)] flex-col py-8 gap-panel-gap hidden md:flex">
+<!-- Header -->
+<div class="px-6 mb-8">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-primary/50 overflow-hidden relative group">
+<img alt="Player Character Avatar" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:mix-blend-normal transition-all" data-alt="A futuristic cyberpunk avatar portrait of a digital warrior in sleek, dark armor with glowing neon purple accents. The background is a dark, gritty sci-fi city environment. High contrast lighting, dark anime aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1Dld5vENmKTUGQ_dFXCSu_UL5vSQ_U2OTnyyR6YlZIS8JmSJznGON9HM89Rvx3zgAcnxyyFHuxelAXrkeX62RNTOWTCjesRIbjmcidKHAXViqDnRmi3ACDw2jW2KAXvEAPy7DlJRZbHWQSaosORGxWeDaGR6CjZdkAO9MQ05P8BpvrPPaJ5XcKYWFFXAAvAMkn6cWB4FnTozcbWk7r26ACJ2cVbIwbzNfVB8z1Xo0bLNZkGvUCTqFHFpjioSPS-HDMxRwPIvu-prW"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter italic">NEON_STRIKER</h1>
+<p class="font-label-caps text-label-caps text-tertiary mt-1">RANK: ELITE III</p>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col flex-1 px-4 gap-2">
+<!-- Inactive: Battle Arena -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-DEFAULT font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 duration-300">swords</span>
+<span class="group-hover:translate-x-1 duration-300">Battle Arena</span>
+</a>
+</li>
+<!-- ACTIVE: Practice -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-DEFAULT font-label-caps text-label-caps bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container shadow-[0_0_15px_rgba(160,120,255,0.5)] border-l-4 border-primary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 duration-300" style="font-variation-settings: 'FILL' 1;">target</span>
+<span class="group-hover:translate-x-1 duration-300">Practice</span>
+</a>
+</li>
+<!-- Inactive: Leaderboard -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-DEFAULT font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 duration-300">military_tech</span>
+<span class="group-hover:translate-x-1 duration-300">Leaderboard</span>
+</a>
+</li>
+<!-- Inactive: Armory -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-DEFAULT font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 duration-300">shield</span>
+<span class="group-hover:translate-x-1 duration-300">Armory</span>
+</a>
+</li>
+<!-- Inactive: Profile -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-DEFAULT font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/30 hover:border-l-4 hover:border-tertiary transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 duration-300">person</span>
+<span class="group-hover:translate-x-1 duration-300">Profile</span>
+</a>
+</li>
+</ul>
+<!-- CTA -->
+<div class="px-4 mt-auto">
+<button class="w-full py-4 border border-tertiary/50 bg-tertiary/10 text-tertiary font-label-caps text-label-caps tracking-[0.2em] uppercase manga-panel hover:bg-tertiary hover:text-surface transition-colors duration-300 relative overflow-hidden group">
+<span class="relative z-10">GO_TO_RIFT</span>
+<div class="absolute inset-0 w-1/4 h-full bg-white/20 -skew-x-12 -translate-x-full group-hover:animate-[slash_0.5s_ease-out_forwards]"></div>
+</button>
+</div>
+</nav>
+<!-- Main Canvas: The Danger Room -->
+<main class="flex-1 ml-0 md:ml-64 h-screen relative bg-surface hologrid flex flex-col justify-between">
+<!-- Top HUD Layout (Arena View) -->
+<header class="w-full p-gutter flex justify-between items-start z-20 pointer-events-none">
+<!-- Left Stats -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">speed</span>
+<span class="font-label-caps text-label-caps tracking-widest opacity-80">CURRENT WPM</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface drop-shadow-[0_0_15px_rgba(76,215,246,0.5)] glitch-hover">
+                    142<span class="text-tertiary text-[32px]">.4</span>
+</div>
+</div>
+<!-- Center Environment Indicator -->
+<div class="flex flex-col items-center border border-tertiary/30 bg-surface-container-lowest/80 backdrop-blur-md px-6 py-2 manga-panel-reverse">
+<span class="font-label-caps text-label-caps text-error animate-pulse">LIVE ENVIRONMENT</span>
+<span class="font-hud-stat text-hud-stat text-on-surface tracking-widest mt-1">SECTOR: DANGER_ROOM_01</span>
+</div>
+<!-- Right Stats -->
+<div class="flex flex-col gap-2 items-end">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="font-label-caps text-label-caps tracking-widest opacity-80">ACCURACY</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">track_changes</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface drop-shadow-[0_0_15px_rgba(76,215,246,0.5)] glitch-hover">
+                    98<span class="text-tertiary text-[32px]">.8%</span>
+</div>
+</div>
+</header>
+<!-- Center Stage: Holographic Target -->
+<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none mb-[204px]">
+<div class="relative w-64 h-64 md:w-96 md:h-96">
+<!-- Outer glowing ring -->
+<div class="absolute inset-0 rounded-full border border-tertiary/20 animate-[spin_10s_linear_infinite]"></div>
+<div class="absolute inset-4 rounded-full border-2 border-dashed border-tertiary/40 animate-[spin_15s_linear_infinite_reverse]"></div>
+<!-- Target Image -->
+<img alt="Holographic Training Target" class="w-full h-full object-cover rounded-full mix-blend-screen opacity-70 blur-[1px]" data-alt="A glowing, neon-cyan wireframe holographic training dummy floating in the center of a dark, cyberpunk 'Danger Room'. The dummy is abstract, composed of geometric polygons and bright energy lines. The background is pitch black with subtle, high-tech grid patterns and data streams. High contrast, sharp edges, cinematic manga-style framing, dark anime aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD084JQxF6enwmoNHxVLpmEQ9ditE8O_lA-H5iAjBAMbBSCq4yrvMLQNK_1hZReOAYISXFuhUEcYROXnPfoIKzTAvxBe1uuFzOtxnM8jraJ-gYCT0lwMJVVFpA89JCVkeq0ZA6kzYfl1YHyl4l9pYwklXHO-AeRUsw0yEVV5tBo5OQvV64tHN-mATIcnFy7EotUihgJgv5gBvLb3UtKE6hz_7UXVcbK-NgGtWTrJK6cml1i6X5-Y1UodTNaXGuX6jdJXqXqC8SztZjs"/>
+<!-- Center Lock-on reticle -->
+<div class="absolute inset-0 flex items-center justify-center text-tertiary opacity-50">
+<span class="material-symbols-outlined text-[64px]" style="font-variation-settings: 'wght' 100;">close</span>
+</div>
+</div>
+</div>
+<!-- Lower Third: High-Focus Typing Console -->
+<section class="z-30 w-full px-gutter pb-gutter md:px-margin-desktop md:pb-margin-desktop flex flex-col gap-6">
+<!-- Real-time Feedback Bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-unit h-24 max-w-6xl mx-auto w-full">
+<!-- WPM Graph Card -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/30 p-4 flex flex-col justify-between relative overflow-hidden group">
+<div class="font-label-caps text-label-caps text-on-surface-variant flex justify-between">
+<span>VELOCITY GRAPH</span>
+<span class="text-tertiary">STABLE</span>
+</div>
+<!-- Stylized CSS Bar Chart -->
+<div class="flex items-end gap-1 h-10 w-[120%] -ml-[10%] animate-scroll-graph opacity-70">
+<div class="w-3 bg-tertiary/40 h-[40%]"></div>
+<div class="w-3 bg-tertiary/60 h-[60%]"></div>
+<div class="w-3 bg-tertiary/50 h-[50%]"></div>
+<div class="w-3 bg-tertiary/80 h-[80%]"></div>
+<div class="w-3 bg-tertiary h-[90%]"></div>
+<div class="w-3 bg-tertiary/70 h-[70%]"></div>
+<div class="w-3 bg-tertiary/90 h-[85%]"></div>
+<div class="w-3 bg-tertiary/50 h-[60%]"></div>
+<div class="w-3 bg-tertiary/80 h-[75%]"></div>
+<div class="w-3 bg-tertiary/40 h-[45%]"></div>
+<div class="w-3 bg-tertiary/60 h-[55%]"></div>
+<div class="w-3 bg-tertiary h-[100%] shadow-[0_0_10px_#4cd7f6]"></div>
+<div class="w-3 bg-tertiary/80 h-[80%]"></div>
+<div class="w-3 bg-tertiary/50 h-[50%]"></div>
+</div>
+<!-- Bottom line -->
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-tertiary/50"></div>
+</div>
+<!-- Accuracy Heatmap Card -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/30 p-4 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant">ZONE HEATMAP</div>
+<div class="flex flex-col gap-1 w-full max-w-[200px] mx-auto opacity-80">
+<!-- Top row -->
+<div class="flex justify-center gap-1">
+<div class="w-4 h-4 bg-tertiary/20"></div>
+<div class="w-4 h-4 bg-tertiary/80 shadow-[0_0_5px_#4cd7f6]"></div>
+<div class="w-4 h-4 bg-tertiary/20"></div>
+<div class="w-4 h-4 bg-error/60 border border-error"></div>
+<div class="w-4 h-4 bg-tertiary/40"></div>
+<div class="w-4 h-4 bg-tertiary/20"></div>
+</div>
+<!-- Middle row -->
+<div class="flex justify-center gap-1">
+<div class="w-4 h-4 bg-tertiary/20"></div>
+<div class="w-4 h-4 bg-tertiary/40"></div>
+<div class="w-4 h-4 bg-error/80 shadow-[0_0_5px_#ffb4ab] border border-error animate-pulse"></div>
+<div class="w-4 h-4 bg-tertiary/90 shadow-[0_0_5px_#4cd7f6]"></div>
+<div class="w-4 h-4 bg-tertiary/20"></div>
+</div>
+</div>
+</div>
+<!-- Focus Keys Card -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/30 p-4 flex flex-col justify-between items-end manga-panel-reverse">
+<div class="font-label-caps text-label-caps text-error animate-pulse flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                        CRITICAL TARGETS
+                    </div>
+<div class="flex gap-2">
+<div class="w-8 h-8 flex items-center justify-center font-hud-stat text-hud-stat bg-error/10 border border-error text-error shadow-[inset_0_0_8px_rgba(255,180,171,0.2)]">F</div>
+<div class="w-8 h-8 flex items-center justify-center font-hud-stat text-hud-stat bg-error/10 border border-error text-error shadow-[inset_0_0_8px_rgba(255,180,171,0.2)]">J</div>
+<div class="w-8 h-8 flex items-center justify-center font-hud-stat text-hud-stat bg-surface-variant/50 border border-outline text-on-surface-variant">;</div>
+</div>
+</div>
+</div>
+<!-- The Typing Field -->
+<div class="w-full max-w-6xl mx-auto bg-surface-container-low/90 backdrop-blur-xl border border-tertiary/50 p-6 md:p-10 shadow-[0_0_30px_rgba(76,215,246,0.1)] relative manga-panel group">
+<!-- Decorative Corner Accents -->
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-tertiary"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-tertiary"></div>
+<div class="font-typing-area text-typing-area break-words whitespace-pre-wrap flex flex-wrap">
+<span class="text-tertiary drop-shadow-[0_0_8px_rgba(76,215,246,0.8)] opacity-50">Initiating combat sequence. Target acquired in sector </span>
+<span class="text-tertiary drop-shadow-[0_0_8px_rgba(76,215,246,0.8)] bg-tertiary/20">7G.</span>
+<span class="text-error bg-error/20 border-b-2 border-error animate-[shake_0.2s_ease-in-out_infinite]"> R</span>
+<span class="w-[3px] h-[1.2em] bg-tertiary animate-pulse ml-1 inline-block shadow-[0_0_10px_#4cd7f6]"></span>
+<span class="text-on-surface-variant opacity-40 ml-1">erouting power to forward shields and engaging manual override protocols. Maintain typing speed to stabilize the core matrix.</span>
+</div>
+<!-- Bottom Decorative Bar -->
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/3 h-[2px] bg-gradient-to-r from-transparent via-tertiary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+</div>
+</section>
+</main>
+</body></html>

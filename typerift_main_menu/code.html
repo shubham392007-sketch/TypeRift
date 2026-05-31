@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TYPERIFT - TYPE TO SURVIVE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Anybody:wght@700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#e2e2e2",
+                      "tertiary-fixed-dim": "#4cd7f6",
+                      "primary": "#d0bcff",
+                      "tertiary-fixed": "#acedff",
+                      "on-tertiary-fixed-variant": "#004e5c",
+                      "surface-container-low": "#1b1b1b",
+                      "surface-bright": "#393939",
+                      "on-primary": "#3c0091",
+                      "secondary-container": "#a40217",
+                      "surface-container": "#1f1f1f",
+                      "on-surface": "#e2e2e2",
+                      "on-secondary-fixed": "#410004",
+                      "on-background": "#e2e2e2",
+                      "on-tertiary-container": "#002f38",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#131313",
+                      "secondary": "#ffb3ad",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#e9ddff",
+                      "surface-container-highest": "#353535",
+                      "outline": "#958ea0",
+                      "secondary-fixed-dim": "#ffb3ad",
+                      "on-surface-variant": "#cbc3d7",
+                      "inverse-primary": "#6d3bd7",
+                      "outline-variant": "#494454",
+                      "primary-fixed-dim": "#d0bcff",
+                      "tertiary": "#4cd7f6",
+                      "on-error": "#690005",
+                      "surface-variant": "#353535",
+                      "on-secondary-container": "#ffaea8",
+                      "on-secondary": "#68000a",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary": "#003640",
+                      "on-secondary-fixed-variant": "#930013",
+                      "surface": "#131313",
+                      "primary-container": "#a078ff",
+                      "tertiary-container": "#009eb9",
+                      "secondary-fixed": "#ffdad7",
+                      "inverse-on-surface": "#303030",
+                      "surface-container-high": "#2a2a2a",
+                      "error-container": "#93000a",
+                      "surface-tint": "#d0bcff",
+                      "on-tertiary-fixed": "#001f26",
+                      "background": "#131313",
+                      "on-primary-fixed-variant": "#5516be",
+                      "on-primary-container": "#340080",
+                      "on-primary-fixed": "#23005c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "panel-gap": "24px",
+                      "gutter": "16px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Space Grotesk"
+                      ],
+                      "headline-md": [
+                              "Anybody"
+                      ],
+                      "typing-area": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Anybody"
+                      ],
+                      "headline-xl": [
+                              "Anybody"
+                      ],
+                      "hud-stat": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "typing-area": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0.2em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-xl": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "hud-stat": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        /* Custom Scanline Effect */
+        .scanlines {
+            position: relative;
+        }
+        .scanlines::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Glitch Animation */
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: theme('colors.primary');
+            text-shadow: 2px 0 theme('colors.secondary'), -2px 0 theme('colors.tertiary');
+        }
+
+        /* Slash Hover Effect */
+        .slash-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .slash-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transform: skewX(-45deg);
+            transition: all 0.5s ease;
+        }
+        .slash-btn:hover::after {
+            left: 150%;
+        }
+        .slash-btn:active {
+            transform: scale(0.95);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        /* Floating Embers */
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+        }
+        .ember {
+            position: absolute;
+            background: theme('colors.primary');
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float 4s linear infinite;
+        }
+
+        /* Holographic Bloom */
+        .holographic-bloom {
+            box-shadow: 0 0 20px theme('colors.primary'), inset 0 0 10px theme('colors.primary');
+        }
+
+        /* Manga Framing Details */
+        .manga-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid theme('colors.primary');
+        }
+        .manga-corner-tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .manga-corner-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+        .manga-corner-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+        .manga-corner-br { bottom: 0; right: 0; border-left: none; border-top: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-hidden font-body-sm relative scanlines">
+<!-- Embers Container -->
+<div class="absolute inset-0 pointer-events-none z-0" id="embers-container"></div>
+<!-- Background Image Layer -->
+<div class="absolute inset-0 z-[-1] opacity-40 mix-blend-screen bg-cover bg-center" data-alt="A gritty cyberpunk arena at night, lit by neon purple and crimson lights. The setting is a ruined futuristic city street with holographic billboards fading into static. The mood is tense, cinematic, and high-octane. Heavy shadows contrast with vibrant, glowing structural lines." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoMme801uQ9nUt5W0F3f31nxoZATicunvh6yvoMq8RStNoZQPHEfmBtRELl5mSdDDi_OaLRCGZZMdSkSzPHzj7YmFu-WZXarFue3B3k9_1rvZ3rU4tIWe3qtdigVfYiqQN5btRMI4BxB6EArjOpwVtzYEUuatvssyni_xgQV2TfKnBQTTOsIYNLEpVZ_pv_BYgYZeZlzXOCgWLh2-zBb2IRrl2H_GnETV6P-PB48jkvxUhpL6zlz3Eq6VuIWwYSa_a58Ih-_IL1kqt');"></div>
+<div class="absolute inset-0 z-[-1] bg-gradient-to-t from-background via-transparent to-background/80"></div>
+<!-- Navigation Shell - TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 max-w-none bg-surface-dim/80 dark:bg-surface-dim/80 border-b border-outline-variant/30 backdrop-blur-md shadow-[0_0_20px_rgba(208,188,255,0.1)] relative z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl" data-weight="fill">swords</span>
+<div class="flex flex-col">
+<span class="text-label-caps font-label-caps text-on-surface-variant">RANK</span>
+<span class="text-headline-md font-headline-md font-black tracking-tighter text-primary dark:text-primary">UNRANKED</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="text-on-surface-variant font-label-caps hover:bg-primary-container/20 hover:text-primary transition-all duration-300 flex items-center gap-2 px-3 py-1 rounded border border-outline-variant/50 backdrop-blur-sm">
+<span class="text-label-caps font-label-caps">SETTINGS</span>
+<span class="material-symbols-outlined text-lg">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center relative z-10 px-margin-mobile md:px-margin-desktop py-panel-gap">
+<!-- Center Stage: Logo & Actions -->
+<div class="flex flex-col items-center justify-center max-w-4xl w-full relative">
+<!-- Manga Corners -->
+<div class="manga-corner manga-corner-tl -top-8 -left-8 md:-left-16 hidden md:block"></div>
+<div class="manga-corner manga-corner-tr -top-8 -right-8 md:-right-16 hidden md:block"></div>
+<div class="manga-corner manga-corner-bl -bottom-8 -left-8 md:-left-16 hidden md:block"></div>
+<div class="manga-corner manga-corner-br -bottom-8 -right-8 md:-right-16 hidden md:block"></div>
+<!-- Crossed Swords Icon -->
+<div class="mb-6 animate-pulse opacity-80">
+<span class="material-symbols-outlined text-6xl text-primary drop-shadow-[0_0_15px_rgba(208,188,255,0.8)]" style="font-variation-settings: 'FILL' 1;">swords</span>
+</div>
+<!-- Title Area -->
+<div class="text-center mb-12 relative">
+<h1 class="text-headline-xl font-headline-xl text-transparent bg-clip-text bg-gradient-to-b from-white to-primary filter drop-shadow-[0_0_25px_rgba(208,188,255,0.6)] uppercase tracking-widest glitch-hover cursor-default">
+                    TYPERIFT
+                </h1>
+<p class="text-headline-md font-headline-md text-secondary mt-2 tracking-[0.3em] uppercase opacity-90">
+                    TYPE TO SURVIVE
+                </p>
+<!-- Decorative Slash below title -->
+<div class="w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent mt-8 relative">
+<div class="absolute left-1/2 -top-1 w-2 h-2 bg-primary rotate-45 transform -translate-x-1/2 shadow-[0_0_10px_#d0bcff]"></div>
+</div>
+</div>
+<!-- Action Buttons Area -->
+<div class="flex flex-col sm:flex-row gap-6 w-full max-w-2xl justify-center items-center">
+<!-- Primary Action -->
+<button class="slash-btn relative group flex-1 w-full max-w-sm h-16 bg-secondary-container/20 border border-secondary text-secondary font-headline-md text-headline-md uppercase tracking-wider overflow-hidden backdrop-blur-md rounded-DEFAULT hover:bg-secondary-container/40 hover:border-secondary-fixed transition-all duration-300 shadow-[0_0_15px_rgba(255,179,173,0.2)] hover:shadow-[0_0_25px_rgba(255,179,173,0.5)]">
+<span class="relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">ENTER ARENA</span>
+<!-- Internal Corner Accents -->
+<div class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-secondary"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-secondary"></div>
+</button>
+<!-- Secondary Action -->
+<button class="slash-btn relative group flex-1 w-full max-w-sm h-16 bg-surface-container/50 border border-outline-variant text-on-surface font-headline-md text-headline-md uppercase tracking-wider overflow-hidden backdrop-blur-md rounded-DEFAULT hover:bg-surface-bright/50 hover:border-primary hover:text-primary transition-all duration-300">
+<span class="relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">PRACTICE MODE</span>
+<!-- Internal Corner Accents -->
+<div class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-outline-variant group-hover:border-primary transition-colors"></div>
+<div class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-outline-variant group-hover:border-primary transition-colors"></div>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer HUD Elements -->
+<footer class="w-full px-margin-desktop py-4 flex justify-between items-center text-label-caps font-label-caps text-on-surface-variant z-20 relative border-t border-outline-variant/20 bg-surface-dim/50 backdrop-blur-sm hidden md:flex">
+<div class="flex gap-6">
+<button class="hover:text-primary transition-colors flex items-center gap-2 group">
+<span class="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">help</span>
+                HOW TO PLAY
+            </button>
+<button class="hover:text-primary transition-colors flex items-center gap-2 group">
+<span class="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">info</span>
+                CREDITS
+            </button>
+</div>
+<div class="tracking-widest opacity-50">
+            v1.0.0
+        </div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe md:hidden bg-surface-container-low/95 dark:bg-surface-container-low/95 rounded-t-xl border-t border-primary/30 backdrop-blur-md shadow-[0_-4px_20px_rgba(208,188,255,0.2)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined mb-1 text-xl">swords</span>
+<span class="text-[10px] font-label-caps uppercase tracking-wider">FIGHT</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary/20 text-primary rounded-xl px-4 py-1 border border-primary/50 scale-110 shadow-[0_0_15px_rgba(208,188,255,0.3)]">
+<span class="material-symbols-outlined mb-1 text-xl" style="font-variation-settings: 'FILL' 1;">target</span>
+<span class="text-[10px] font-label-caps uppercase tracking-wider">TRAIN</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined mb-1 text-xl">bar_chart</span>
+<span class="text-[10px] font-label-caps uppercase tracking-wider">STATS</span>
+</button>
+</nav>
+<script>
+        // Simple Ember Particle System
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('embers-container');
+            const emberCount = 30;
+
+            for (let i = 0; i < emberCount; i++) {
+                createEmber();
+            }
+
+            function createEmber() {
+                const ember = document.createElement('div');
+                ember.classList.add('ember');
+                
+                // Randomize properties
+                const size = Math.random() * 4 + 2 + 'px';
+                const left = Math.random() * 100 + 'vw';
+                const top = Math.random() * 100 + 'vh';
+                const duration = Math.random() * 3 + 2 + 's';
+                const delay = Math.random() * 5 + 's';
+
+                ember.style.width = size;
+                ember.style.height = size;
+                ember.style.left = left;
+                ember.style.top = top;
+                ember.style.animationDuration = duration;
+                ember.style.animationDelay = delay;
+
+                // Color variation (primary to secondary)
+                if(Math.random() > 0.7) {
+                    ember.style.backgroundColor = '#ffb3ad'; // Secondary color
+                    ember.style.boxShadow = '0 0 10px #ffb3ad';
+                } else {
+                    ember.style.boxShadow = '0 0 10px #d0bcff';
+                }
+
+                container.appendChild(ember);
+
+                // Recreate ember when animation ends
+                ember.addEventListener('animationend', () => {
+                    ember.remove();
+                    createEmber();
+                });
+            }
+        });
+    </script>
+</body></html>
